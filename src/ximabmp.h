@@ -55,7 +55,7 @@ protected:
 #define BFT_CURSOR 0x5450   /* 'PT' */
 
 #ifndef WIDTHBYTES
-#define WIDTHBYTES(i)           ((unsigned)((i+31)&(~31))/8)  /* ULONG aligned ! */
+#define WIDTHBYTES(i)           ((unsigned)(((i)+31)&(~31))/8)  /* ULONG aligned ! */
 #endif
 
 #endif

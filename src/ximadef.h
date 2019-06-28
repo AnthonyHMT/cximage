@@ -75,8 +75,8 @@
 #include <tchar.h>
 #endif
 
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 
 #ifdef __BORLANDC__
 
@@ -98,10 +98,10 @@ typedef struct tagcomplex {
 
 #if !defined(WIN32) && !defined(_WIN32_WCE)
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include <cstdint>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
 
 typedef uint32_t   COLORREF;
 typedef void*      HANDLE;
@@ -207,7 +207,7 @@ typedef struct tagcomplex {
 
 #endif
 
-#define _cabs(c) sqrt(c.x*c.x+c.y*c.y)
+#define _cabs(c) sqrt((c).x*(c).x+(c).y*(c).y)
 
 #endif
 

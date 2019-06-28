@@ -45,16 +45,16 @@
  #include <windows.h>
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "ximadef.h"
 
 class DLL_EXP CxFile
 {
 public:
-	CxFile(void) { };
-	virtual ~CxFile() { };
+	CxFile() = default;;
+	virtual ~CxFile() = default;;
 
 	virtual bool	Close() = 0;
 	virtual size_t	Read(void *buffer, size_t size, size_t count) = 0;

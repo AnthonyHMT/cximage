@@ -193,8 +193,8 @@ typedef struct {
 #define TIFFSetFieldBit(tif, field)	(BITFIELDn(tif, field) |= BITn(field))
 #define TIFFClrFieldBit(tif, field)	(BITFIELDn(tif, field) &= ~BITn(field))
 
-#define FieldSet(fields, f)		(fields[(f)/32] & BITn(f))
-#define ResetFieldBit(fields, f)	(fields[(f)/32] &= ~BITn(f))
+#define FieldSet(fields, f)		((fields)[(f)/32] & BITn(f))
+#define ResetFieldBit(fields, f)	((fields)[(f)/32] &= ~BITn(f))
 
 typedef enum {
 	TIFF_SETGET_UNDEFINED = 0,

@@ -39,11 +39,11 @@
 #endif
 
 #ifdef HAVE_STRING_H
-# include <string.h>
+# include <cstring>
 #endif
 
 #ifdef HAVE_ASSERT_H
-# include <assert.h>
+# include <cassert>
 #else
 # define assert(x) 
 #endif
@@ -208,7 +208,7 @@ struct tiff {
 	size_t               tif_nfieldscompat;
 };
 
-#define isPseudoTag(t) (t > 0xffff)            /* is tag value normal or pseudo */
+#define isPseudoTag(t) ((t) > 0xffff)            /* is tag value normal or pseudo */
 
 #define isTiled(tif) (((tif)->tif_flags & TIFF_ISTILED) != 0)
 #define isMapped(tif) (((tif)->tif_flags & TIFF_MAPPED) != 0)
@@ -245,7 +245,7 @@ struct tiff {
 #endif
 
 /* NB: the uint32 casts are to silence certain ANSI-C compilers */
-#define TIFFhowmany_32(x, y) (((uint32)x < (0xffffffff - (uint32)(y-1))) ? \
+#define TIFFhowmany_32(x, y) (((uint32)(x) < (0xffffffff - (uint32)((y)-1))) ? \
 			   ((((uint32)(x))+(((uint32)(y))-1))/((uint32)(y))) : \
 			   0U)
 /* Variant of TIFFhowmany_32() that doesn't return 0 if x close to MAXUINT. */
