@@ -62,18 +62,21 @@ if(WIN32)
     target_link_libraries(cximage ${EXTRA_LIBS})
 elseif(UNIX AND NOT APPLE)
     add_definitions(-D_LINUX)
-    set(PKG_CONFIG_USE_CMAKE_PREFIX_PATH ${CMAKE_SYSROOT}/usr/lib/pkgconfig)
-    set(PKG_CONFIG_PATH ${CMAKE_SYSROOT}/usr/lib/pkgconfig)
+
+    if(DEFINED CMAKE_SYSROOT)
+        set(PKG_CONFIG_USE_CMAKE_PREFIX_PATH ${CMAKE_SYSROOT}/usr/lib/pkgconfig)
+        set(PKG_CONFIG_PATH ${CMAKE_SYSROOT}/usr/lib/pkgconfig)
+        set(PKG_CONFIG_EXECUTABLE ${CMAKE_SYSROOT}/../../bin/pkg-config)
+    endif()
 
     #find_package(jasper)
     find_package(PkgConfig REQUIRED)
-    if (NOT PkgConfig_FOUND)
-        set(PKG_CONFIG_EXECUTABLE ${CMAKE_SYSROOT}/../../bin/pkg-config)
-        find_package(PkgConfig REQUIRED)
-    endif()
 
     pkg_check_modules(REQLIBS REQUIRED ${EXTRA_PKGS})
-    target_include_directories(cximage ${REQLIBS_INCLUDE_DIRS})
+
+    #message("${REQLIBS_INCLUDE_DIRS}  || ${REQLIBS_LIBRARIES}")
+
+    include_directories(${REQLIBS_INCLUDE_DIRS})
     target_link_libraries(cximage ${REQLIBS_LIBRARIES})
 endif()
 

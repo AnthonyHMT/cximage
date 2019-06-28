@@ -198,7 +198,9 @@
 #define TM_IN_SYS_TIME 1
 
 /* define to use win32 IO system */
+#ifdef _WIN32
 #define USE_WIN32_FILEIO 1
+#endif
 
 /* Version number of package */
 #define VERSION ""
