@@ -1,6 +1,21 @@
 #if !defined(__ximaCFG_h)
 #define __ximaCFG_h
 
+/* jpeg support */
+#cmakedefine CXIMG_WITH_JPG 1
+
+/* png support */
+#cmakedefine CXIMG_WITH_PNG 1
+
+/* tiff support */
+#cmakedefine CXIMG_WITH_TIF 1
+
+/* mng support */
+#cmakedefine CXIMG_WITH_MNG 1
+
+/* jasper support */
+#cmakedefine CXIMG_WITH_JASPER 1
+
 /////////////////////////////////////////////////////////////////////////////
 // CxImage supported features
 #define CXIMAGE_SUPPORT_ALPHA          1
@@ -19,18 +34,18 @@
 // CxImage supported formats
 #define CXIMAGE_SUPPORT_BMP 1
 #define CXIMAGE_SUPPORT_GIF 1
-#ifdef SUPPORT_JPG
+#ifdef CXIMG_WITH_JPG
 #define CXIMAGE_SUPPORT_JPG 1
 #else
 #define CXIMAGE_SUPPORT_JPG 0
 #endif
-#ifdef SUPPORT_PNG
+#ifdef CXIMG_WITH_PNG
 #define CXIMAGE_SUPPORT_PNG 1
 #else
 #define CXIMAGE_SUPPORT_PNG 0
 #endif
 #define CXIMAGE_SUPPORT_ICO 1
-#ifdef SUPPORT_TIFF
+#ifdef CXIMG_WITH_TIF
 #define CXIMAGE_SUPPORT_TIF 1
 #else
 #define CXIMAGE_SUPPORT_TIF 0
@@ -40,7 +55,7 @@
 #define CXIMAGE_SUPPORT_WBMP 1
 #define CXIMAGE_SUPPORT_WMF 1
 
-#ifdef WITH_JASPER
+#ifdef CXIMG_WITH_JASPER
 #define CXIMAGE_SUPPORT_JP2 1
 #define CXIMAGE_SUPPORT_JPC 1
 #define CXIMAGE_SUPPORT_PGX 1
@@ -56,7 +71,7 @@
 
 #define CXIMAGE_SUPPORT_JBG 0		// GPL'd see ../jbig/copying.txt & ../jbig/patents.htm
 
-#ifdef SUPPORT_MNG
+#ifdef CXIMG_WITH_MNG
 #define CXIMAGE_SUPPORT_MNG 1
 #else
 #define CXIMAGE_SUPPORT_MNG 0
