@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.0)
 project(cximage)
 
 if (NOT WIN32 AND NOT UNIX OR APPLE)
@@ -72,7 +72,7 @@ elseif(UNIX AND NOT APPLE)
     endif()
 
     pkg_check_modules(REQLIBS REQUIRED ${EXTRA_PKGS})
-    target_include_directories(cximage ${REQLIBS_INCLUDE_DIRS})
+    include_directories(${REQLIBS_INCLUDE_DIRS})
     target_link_libraries(cximage ${REQLIBS_LIBRARIES})
 endif()
 
