@@ -95,7 +95,11 @@ _TIFFFdOpen(void* fd, const char* name, const char* mode)
 	    _tiffSizeProcEx, _tiffMapProcEx, _tiffUnmapProcEx);
 	if (tif)
 	{
+#if defined(__x86_64__) || defined(__amd64__)
+        tif->tif_fd = (long long)fd;
+#else
 		tif->tif_fd = (long)fd;
+#endif
 	}
 	return (tif);
 }
