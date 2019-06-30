@@ -561,6 +561,8 @@ public:
 
 	bool Encode2RGBA(CxFile *hFile, bool bFlipY = false);
 	bool Encode2RGBA(uint8_t * &buffer, int32_t &size, bool bFlipY = false);
+    bool Encode2ABGR(CxFile *hFile, bool bFlipY = false);
+    bool Encode2ABGR(uint8_t * &buffer, int32_t &size, bool bFlipY = false);
 //@}
 #endif //CXIMAGE_SUPPORT_ENCODE
 

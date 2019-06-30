@@ -544,6 +544,55 @@ bool CxImage::Encode2RGBA(CxFile *hFile, bool bFlipY)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+/**
+ * exports the image into a ABGR buffer, Useful for OpenGL applications.
+ * \param buffer: output memory buffer pointer. Must be NULL,
+ * the function allocates and fill the memory,
+ * the application must free the buffer, see also FreeMemory().
+ * \param size: output memory buffer size.
+ * \param bFlipY: direction of Y axis. default = false.
+ * \return true if everything is ok
+ */
+bool CxImage::Encode2ABGR(uint8_t * &buffer, int32_t &size, bool bFlipY)
+{
+	if (buffer!=NULL){
+		strcpy(info.szLastError,"the buffer must be empty");
+		return false;
+	}
+	CxMemFile file;
+	file.Open();
+	if(Encode2ABGR(&file,bFlipY)){
+		buffer=file.GetBuffer();
+		size=file.Size();
+		return true;
+	}
+	return false;
+}
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * exports the image into a ABGR buffer, Useful for OpenGL applications.
+ * \param hFile: file handle (CxMemFile or CxIOFile), with write access.
+ * \param bFlipY: direction of Y axis. default = false.
+ * \return true if everything is ok
+ */
+bool CxImage::Encode2ABGR(CxFile *hFile, bool bFlipY)
+{
+	if (EncodeSafeCheck(hFile)) return false;
+
+	for (int32_t y1 = 0; y1 < head.biHeight; y1++) {
+		int32_t y = bFlipY ? head.biHeight - 1 - y1 : y1;
+		for(int32_t x = 0; x < head.biWidth; x++) {
+			RGBQUAD color = BlindGetPixelColor(x,y);
+			hFile->PutC(color.rgbReserved);
+			hFile->PutC(color.rgbBlue);
+			hFile->PutC(color.rgbGreen);
+			hFile->PutC(color.rgbRed);
+		}
+	}
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 #endif //CXIMAGE_SUPPORT_ENCODE
 ////////////////////////////////////////////////////////////////////////////////
 
