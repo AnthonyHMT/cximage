@@ -76,6 +76,9 @@ elseif(UNIX AND NOT APPLE)
     target_link_libraries(cximage ${REQLIBS_LIBRARIES})
 endif()
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libcximage.pc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/libcximage.pc @ONLY)
+
 list(APPEND CXIMAGE_HEADER
         src/ximage.h src/xfile.h src/xiofile.h src/xmemfile.h
         src/ximacfg.h src/ximadef.h)
@@ -90,3 +93,7 @@ install(TARGETS cximage
         LIBRARY DESTINATION "${INSTALL_LIB_DIR}")
 
 install(FILES ${CXIMAGE_HEADER} DESTINATION include/cximage)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libcximage.pc
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+
