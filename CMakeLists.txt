@@ -76,21 +76,27 @@ elseif(UNIX AND NOT APPLE)
     target_link_libraries(cximage ${REQLIBS_LIBRARIES})
 endif()
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libcximage.pc.in
-    ${CMAKE_CURRENT_BINARY_DIR}/libcximage.pc @ONLY)
+set(INSTALL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/bin" CACHE PATH "Installation directory for executables")
+set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE PATH "Installation directory for libraries")
+set(INSTALL_INC_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "Installation directory for headers")
+
+if(NOT WIN32 OR CYGWIN OR MINGW)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libcximage.pc.in
+        ${CMAKE_CURRENT_BINARY_DIR}/libcximage.pc @ONLY)
+endif()
 
 list(APPEND CXIMAGE_HEADER
         src/ximage.h src/xfile.h src/xiofile.h src/xmemfile.h
         src/ximacfg.h src/ximadef.h)
 
-set(INSTALL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/bin" CACHE PATH "Installation directory for executables")
-set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE PATH "Installation directory for libraries")
-set(INSTALL_INC_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "Installation directory for headers")
+if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
+        set(CMAKE_INSTALL_LIBDIR lib)
+endif()
 
 install(TARGETS cximage
-        RUNTIME DESTINATION "${INSTALL_BIN_DIR}"
-        ARCHIVE DESTINATION "${INSTALL_LIB_DIR}"
-        LIBRARY DESTINATION "${INSTALL_LIB_DIR}")
+    RUNTIME DESTINATION ${INSTALL_BIN_DIR}
+    ARCHIVE DESTINATION ${INSTALL_LIB_DIR}
+    LIBRARY DESTINATION ${INSTALL_LIB_DIR})
 
 install(FILES ${CXIMAGE_HEADER} DESTINATION include/cximage)
 

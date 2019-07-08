@@ -1,16 +1,17 @@
-#libevent pkg-config source file
+#libcximage pkg-config source file
 
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-libdir=@libdir@
-includedir=@includedir@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@INSTALL_LIB_DIR@
+sharedlibdir=@INSTALL_LIB_DIR@
+includedir=@INSTALL_INC_DIR@
 
-Name: libevent
-Description: libevent is an asynchronous notification event loop library
+Name: libcximage
+Description: libcximage is an image library
 Version: @VERSION@
-Requires:
+Requires: zlib libjpeg libpng
 Conflicts:
-Libs: -L${libdir} -levent
+Libs: -L${libdir} -lcximage
 Libs.private: @LIBS@
 Cflags: -I${includedir}
 
