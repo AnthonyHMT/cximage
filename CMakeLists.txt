@@ -86,8 +86,22 @@ if(NOT WIN32 OR CYGWIN OR MINGW)
 endif()
 
 list(APPEND CXIMAGE_HEADER
-        src/ximage.h src/xfile.h src/xiofile.h src/xmemfile.h
-        src/ximacfg.h src/ximadef.h)
+    src/ximage.h src/xfile.h src/xiofile.h
+    src/xmemfile.h
+    src/ximacfg.h src/ximadef.h
+    src/ximabmp.h
+    src/ximagif.h
+    src/ximajbg.h
+    src/ximajpg.h
+    src/ximamng.h
+    src/ximapcx.h
+    src/ximapng.h
+    src/ximapsd.h
+    src/ximaraw.h
+    src/ximatga.h
+    src/ximatif.h
+    src/ximawbmp.h
+)
 
 if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
         set(CMAKE_INSTALL_LIBDIR lib)
